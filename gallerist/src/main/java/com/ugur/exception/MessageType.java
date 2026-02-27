@@ -6,8 +6,10 @@ import lombok.Getter;
 public enum MessageType {
 	
 	NO_RECORD_EXIST("1004", "Kayit bulunamadi"),
-	GENERAL_EXCEPTION("9999", "Genel bir hata olustu"),
-	RESOURCE_NOT_FOUND("1005", "Kaynak bulunamadi");
+	TOKEN_IS_EXPIRED("1005", "Tokenin suresi bitmistir."),
+	USERNAME_NOT_FOUND("1006", "username bulunamadi"),
+	GENERAL_EXCEPTION("9999", "Genel bir hata olustu");	
+	
 	
 	private String code;
 	private String message;
