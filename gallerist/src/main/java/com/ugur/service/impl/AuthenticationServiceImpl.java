@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ugur.dto.AuthRequest;
 import com.ugur.dto.AuthResponse;
 import com.ugur.dto.DtoUser;
+import com.ugur.dto.RefreshTokenRequest;
 import com.ugur.entity.RefreshToken;
 import com.ugur.entity.User;
 import com.ugur.exception.BaseException;
@@ -91,6 +92,29 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 		}
 		
 		
+	}
+
+	
+	public boolean isValidRefreshToken(Date expiredDate) {
+		return new Date().before(expiredDate);
+	}
+	
+	@Override
+	public AuthResponse refreshToken(RefreshTokenRequest input) {
+		
+		Optional<RefreshToken> optRefreshToken = refreshTokenRepository.findByRefreshToken(input.getRefreshToken());
+		if(optRefreshToken.isEmpty()) {
+			throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND, input.getRefreshToken()));
+		}
+		if(!isValidRefreshToken(optRefreshToken.get().getExpiredDate())) {
+			throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_IS_EXPIRED, input.getRefreshToken()));
+		}
+		
+		User user=optRefreshToken.get().getUser();
+		String accessToken = jwtService.generateToken(user);
+		RefreshToken savedRefreshToken = refreshTokenRepository.save(createRefreshToken(user));
+		
+		return new AuthResponse(accessToken, savedRefreshToken.getRefreshToken());
 	}
 
 }

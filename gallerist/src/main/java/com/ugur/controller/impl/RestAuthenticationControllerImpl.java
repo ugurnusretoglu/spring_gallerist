@@ -11,6 +11,7 @@ import com.ugur.controller.RootEntity;
 import com.ugur.dto.AuthRequest;
 import com.ugur.dto.AuthResponse;
 import com.ugur.dto.DtoUser;
+import com.ugur.dto.RefreshTokenRequest;
 import com.ugur.service.IAuthenticationService;
 
 import jakarta.validation.Valid;
@@ -31,6 +32,12 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
 	@Override
 	public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest input) {
 		return ok(authenticationService.authenticate(input));
+	}
+	
+	@PostMapping("/refreshToken")
+	@Override
+	public RootEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest input) {
+		return ok(authenticationService.refreshToken(input));
 	}
 
 }
