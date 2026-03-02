@@ -8,6 +8,7 @@ public enum MessageType {
 	NO_RECORD_EXIST("1004", "Kayit bulunamadi"),
 	TOKEN_IS_EXPIRED("1005", "Tokenin suresi bitmistir."),
 	USERNAME_NOT_FOUND("1006", "username bulunamadi"),
+	USERNAME_OR_PASSWORD_INVALID("1007", "Kullanici adi veya sifre hatali"),
 	GENERAL_EXCEPTION("9999", "Genel bir hata olustu");	
 	
 	
