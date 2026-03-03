@@ -27,7 +27,5 @@ public class RestGalleristCarControllerImpl extends RestBaseController implement
 	public RootEntity<DtoGalleristCar> saveGalleristCar(@Valid @RequestBody DtoGalleristCarIU dtoGalleristCarIU) {
 		return ok(galleristCarService.saveGalleristCar(dtoGalleristCarIU));
 	}
-	
 
-	
 }
