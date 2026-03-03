@@ -1,5 +1,10 @@
 package com.ugur.service;
 
-public interface IAddressService {
+import com.ugur.dto.DtoAddress;
+import com.ugur.dto.DtoAddressIU;
 
+public interface IAddressService {
+	
+	public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
+	
 }
