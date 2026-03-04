@@ -1,6 +1,7 @@
 package com.ugur.service.impl;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.ugur.dto.DtoAccount;
 import com.ugur.dto.DtoAccountIU;
 import com.ugur.entity.Account;
+import com.ugur.exception.BaseException;
+import com.ugur.exception.ErrorMessage;
+import com.ugur.exception.MessageType;
 import com.ugur.repository.AccountRepository;
 import com.ugur.service.IAccountService;
 
@@ -31,6 +35,32 @@ public class AccountServiceImpl implements IAccountService {
 		DtoAccount dtoAccount = new DtoAccount();
 		Account savedAccount = accountRepository.save(createAccount(dtoAccountIU));
 		BeanUtils.copyProperties(savedAccount, dtoAccount);
+		
+		return dtoAccount;
+	}
+	
+	public Account getAccountById(Long id) {
+		Optional<Account> optAccount = accountRepository.findById(id);
+		if(optAccount.isPresent()) {
+			return optAccount.get();
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, optAccount.get().getId().toString()));
+		}
+	}
+
+	@Override
+	public DtoAccount deleteAccount(Long id) {
+		Account dbAccount = getAccountById(id);
+		DtoAccount dtoAccount=new DtoAccount();
+		BeanUtils.copyProperties(dbAccount, dtoAccount);
+		dtoAccount.setCurrencyType(dbAccount.getCurrencyType());
+		
+		if(accountRepository.existsCustomerByAccountId(dtoAccount.getId())) {
+			throw new BaseException(new ErrorMessage(MessageType.ACCOUNT_ALREADY_IN_USE, dtoAccount.getId().toString()));
+		}
+		
+		accountRepository.delete(dbAccount);
 		
 		return dtoAccount;
 	}

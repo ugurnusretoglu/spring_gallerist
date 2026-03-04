@@ -14,6 +14,8 @@ public enum MessageType {
 	CURRENCY_RATES_IS_OCCURED("1010", "Doviz kuru alinamadi"),
 	CUSTOMER_AMOUNT_IS_NOT_ENOUGH("1011", "Musterinin parasi yeterli degil."),
 	CAR_STATUS_IS_ALREADY_SALED("1012", "Araba satilmis gorundugu icin satilamaz"),
+	ADDRESS_ALREADY_IN_USE("1013", "Adres kullaniliyor"),
+	ACCOUNT_ALREADY_IN_USE("1014", "Account kullaniliyor"),
 	GENERAL_EXCEPTION("9999", "Genel bir hata olustu");	
 	
 	

@@ -7,4 +7,5 @@ public interface IAddressService {
 	
 	public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
 	
+	public DtoAddress deleteAddress(Long id);
 }

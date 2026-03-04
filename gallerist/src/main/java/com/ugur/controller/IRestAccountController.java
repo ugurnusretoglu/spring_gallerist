@@ -7,4 +7,5 @@ public interface IRestAccountController {
 	
 	public RootEntity<DtoAccount> saveAccount(DtoAccountIU dtoAccountIU);
 	
+	public RootEntity<DtoAccount> deleteAccount(Long id);
 }
