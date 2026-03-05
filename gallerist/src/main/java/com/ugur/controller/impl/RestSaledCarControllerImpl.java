@@ -1,6 +1,8 @@
 package com.ugur.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,12 @@ public class RestSaledCarControllerImpl extends RestBaseController implements IR
 	@Override
 	public RootEntity<DtoSaledCar> buyCar(@Valid @RequestBody DtoSaledCarIU dtoSaledCarIU) {
 		return ok(saledCarService.buyCar(dtoSaledCarIU));
+	}
+
+	@DeleteMapping("/delete/{id}")
+	@Override
+	public void deleteSaledCar(@PathVariable(name = "id") Long id) {
+		saledCarService.deleteSaledCar(id);
 	}
 	
 }

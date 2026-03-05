@@ -25,7 +25,7 @@ public class CurrencyRatesServiceImpl implements ICurrencyRatesService {
 		String endpoint= rootURL+"series="+series+"&startDate="+startDate+"&endDate="+endDate+"&type="+type;
 	
 		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.set("key", "YOUR_KEY_API");
+		httpHeaders.set("key", "LmGSBJhcVB");
 		
 		HttpEntity<?> httpEntity=new HttpEntity<>(httpHeaders);
 		

@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "gallerist_car", 
-uniqueConstraints = {@UniqueConstraint(columnNames = {"gallerist_id", "car_id"}, name ="uq_gallerist_car" )})
+@Table(name = "gallerist_car" ,
+uniqueConstraints = {@UniqueConstraint(columnNames = {"gallerist_id" , "car_id"},name = "uq_gallerist_car")})
 @Getter
 @Setter
 @NoArgsConstructor

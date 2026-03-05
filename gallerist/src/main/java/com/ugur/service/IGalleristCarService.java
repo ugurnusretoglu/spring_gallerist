@@ -7,4 +7,5 @@ public interface IGalleristCarService {
 	
 	public DtoGalleristCar saveGalleristCar(DtoGalleristCarIU dtoGalleristCarIU);
 	
+	public void deleteGalleristCar(Long id);
 }

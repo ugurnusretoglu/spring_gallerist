@@ -145,5 +145,26 @@ public class SaledCarServiceImpl implements ISaledCarService {
 		
 	}
 	
+	public SaledCar getSaledCarById(Long id) {
+		Optional<SaledCar> optSaledCar = saledCarRepository.findById(id);
+		if(optSaledCar.isPresent()) {
+			return optSaledCar.get();
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, optSaledCar.get().getId().toString()));
+		}
+	}
+	
+	@Override
+	public void deleteSaledCar(Long id) {
+		SaledCar dbSaledCar=getSaledCarById(id);
+		if(dbSaledCar!=null) {
+			saledCarRepository.delete(dbSaledCar);
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
+		}
+	}
+	
 
 }

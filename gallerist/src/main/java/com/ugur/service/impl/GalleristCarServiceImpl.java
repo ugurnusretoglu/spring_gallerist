@@ -75,6 +75,27 @@ public class GalleristCarServiceImpl implements IGalleristCarService {
 		return dtoGalleristCar;
 	}
 	
+	public GalleristCar getGalleristCarById(Long id) {
+		Optional<GalleristCar> optGalleristCar = galleristCarRepository.findById(id);
+		if(optGalleristCar.isPresent()) {
+			return optGalleristCar.get();
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, optGalleristCar.get().getId().toString()));
+		}
+	}
+	
+	@Override
+	public void deleteGalleristCar(Long id) {
+		GalleristCar galleristCar=getGalleristCarById(id);
+		if(galleristCar!=null) {
+			galleristCarRepository.delete(galleristCar);
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
+		}
+	}
+	
 	
 
 }
