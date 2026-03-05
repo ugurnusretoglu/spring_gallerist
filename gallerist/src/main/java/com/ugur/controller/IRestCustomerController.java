@@ -7,4 +7,6 @@ public interface IRestCustomerController {
 	
 	public RootEntity<DtoCustomer> saveCustomer(DtoCustomerIU dtoCustomerIU);
 	
+	public void deleteCustomer(Long id);
+	
 }

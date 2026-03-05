@@ -7,4 +7,5 @@ public interface IRestGalleristController {
 	
 	public RootEntity<DtoGallerist> saveGallerist(DtoGalleristIU dtoGalleristIU);
 	
+	public void deleteGallerist(Long id);
 }

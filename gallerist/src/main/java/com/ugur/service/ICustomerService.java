@@ -6,4 +6,6 @@ import com.ugur.dto.DtoCustomerIU;
 public interface ICustomerService {
 	
 	public DtoCustomer saveCustomer(DtoCustomerIU dtoCustomerIU);
+	
+	public void deleteCustomer(Long id);
 }

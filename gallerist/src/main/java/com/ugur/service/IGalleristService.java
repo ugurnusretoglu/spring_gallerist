@@ -7,5 +7,5 @@ public interface IGalleristService {
 	
 	public DtoGallerist saveGallerist(DtoGalleristIU dtoGalleristIU);
 	
-	
+	public void deleteGallerist(Long id);
 }

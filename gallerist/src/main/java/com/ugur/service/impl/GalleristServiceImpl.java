@@ -54,6 +54,14 @@ public class GalleristServiceImpl implements IGalleristService {
 		
 		return dtoGallerist;
 	}
+
+
+	@Override
+	public void deleteGallerist(Long id) {
+		Gallerist gallerist=galleristRepository.findById(id)
+				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
+		galleristRepository.delete(gallerist);
+	}
 	
 	
 	

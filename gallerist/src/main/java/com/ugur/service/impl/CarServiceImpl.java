@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.ugur.dto.DtoCar;
 import com.ugur.dto.DtoCarIU;
 import com.ugur.entity.Car;
+import com.ugur.exception.BaseException;
+import com.ugur.exception.ErrorMessage;
+import com.ugur.exception.MessageType;
 import com.ugur.repository.CarRepository;
 import com.ugur.service.ICarService;
 
@@ -35,4 +38,21 @@ public class CarServiceImpl implements ICarService {
 		return dtoCar;
 	}
 
+	//public Car getCarById(Long id) {
+		//Optional<Car> optCar = carRepository.findById(id);
+		//if(optCar.isPresent()) {
+			//return optCar.get();
+		//}
+		//else {
+			//throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
+		//}
+	//}
+	
+	@Override
+	public void deleteCar(Long id) {
+		Car car=carRepository.findById(id)
+				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
+		
+		carRepository.delete(car);
+	}
 }

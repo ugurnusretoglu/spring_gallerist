@@ -1,6 +1,8 @@
 package com.ugur.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +30,9 @@ public class RestCustomerControllerImpl extends RestBaseController implements IR
 		return ok(customerService.saveCustomer(dtoCustomerIU));
 	}
 	
-
+	@DeleteMapping("/delete/{id}")
+	@Override
+	public void deleteCustomer(@PathVariable(name = "id") Long id) {
+		customerService.deleteCustomer(id);
+	}
 }

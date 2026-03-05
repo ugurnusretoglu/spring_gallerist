@@ -2,6 +2,9 @@ package com.ugur.entity;
 
 import java.util.Date;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
@@ -15,6 +18,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE gallerist.customer SET deleted=true WHERE id=?")
+@SQLRestriction("deleted=false")
 public class Customer extends BaseEntity{
 	
 	@Column(name = "first_name")
@@ -34,5 +39,8 @@ public class Customer extends BaseEntity{
 	
 	@OneToOne
 	private Account account;
+		
+	@Column(name = "deleted")
+	private boolean deleted=false;
 	
 }

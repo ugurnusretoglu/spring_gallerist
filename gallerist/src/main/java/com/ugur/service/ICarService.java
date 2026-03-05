@@ -7,4 +7,6 @@ public interface ICarService {
 	
 	public DtoCar saveCar(DtoCarIU dtoCarIU);
 	
+	public void deleteCar(Long id);
+	
 }

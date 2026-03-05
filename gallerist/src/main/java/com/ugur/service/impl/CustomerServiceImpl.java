@@ -73,4 +73,12 @@ public class CustomerServiceImpl implements ICustomerService {
 		return dtoCustomer;
 	}
 
+	@Override
+	public void deleteCustomer(Long id) {
+		Customer customer=customerRepository.findById(id)
+				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
+		
+		customerRepository.delete(customer);
+	}
+
 }

@@ -16,6 +16,7 @@ public enum MessageType {
 	CAR_STATUS_IS_ALREADY_SALED("1012", "Araba satilmis gorundugu icin satilamaz"),
 	ADDRESS_ALREADY_IN_USE("1013", "Adres kullaniliyor"),
 	ACCOUNT_ALREADY_IN_USE("1014", "Account kullaniliyor"),
+	RECORD_NOT_FOUND("1015", "Aranan kayit yok"),
 	GENERAL_EXCEPTION("9999", "Genel bir hata olustu");	
 	
 	

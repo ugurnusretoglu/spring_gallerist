@@ -2,6 +2,9 @@ package com.ugur.entity;
 
 import java.math.BigDecimal;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import com.ugur.enums.CarStatusType;
 import com.ugur.enums.CurrencyType;
 
@@ -21,6 +24,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE gallerist.car SET deleted = true WHERE id=?")
+@SQLRestriction("deleted=false")
 public class Car extends BaseEntity {
 	
 	@Column(name = "plaka")
@@ -48,5 +53,8 @@ public class Car extends BaseEntity {
 	@Column(name = "car_status_type")
 	@Enumerated(EnumType.STRING)
 	private CarStatusType carStatusType;
+	
+	@Column(name = "deleted")
+	private boolean deleted=false;
 
 }

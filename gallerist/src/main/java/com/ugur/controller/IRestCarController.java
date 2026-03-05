@@ -7,4 +7,6 @@ public interface IRestCarController {
 	
 	public RootEntity<DtoCar> saveCar(DtoCarIU dtoCarIU);
 	
+	public void deleteCar(Long id);
+	
 }
