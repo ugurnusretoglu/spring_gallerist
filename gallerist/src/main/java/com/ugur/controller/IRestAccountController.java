@@ -12,4 +12,6 @@ public interface IRestAccountController {
 	public RootEntity<DtoAccount> deleteAccount(Long id);
 	
 	public RootEntity<List<DtoAccount>> getAllAccounts();
+	
+	public RootEntity<DtoAccount> updateAccount(Long id, DtoAccountIU dtoAccountIU);
 }

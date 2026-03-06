@@ -13,4 +13,5 @@ public interface ICarService {
 	
 	public List<DtoCar> getAllCars();
 	
+	public DtoCar updateCar(Long id, DtoCarIU dtoCarIU);
 }

@@ -3,6 +3,7 @@ package com.ugur.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.ugur.service.ICarService;
 
 @Service
 public class CarServiceImpl implements ICarService {
-	
+
 	@Autowired
 	private CarRepository carRepository;
 	
@@ -69,5 +70,34 @@ public class CarServiceImpl implements ICarService {
 			dtoList.add(dto);
 		}
 		return dtoList;
+	}
+
+	@Override
+	public DtoCar updateCar(Long id, DtoCarIU dtoCarIU) {
+		DtoCar dto=new DtoCar();
+		Optional<Car> optCar = carRepository.findById(id);
+		if(optCar.isPresent()) {
+			
+			Car dbCar=optCar.get();
+			
+			dbCar.setPlaka(dtoCarIU.getPlaka());
+			dbCar.setBrand(dtoCarIU.getBrand());
+			dbCar.setModel(dtoCarIU.getModel());
+			dbCar.setProductionYear(dtoCarIU.getProductionYear());
+			dbCar.setPrice(dtoCarIU.getPrice());
+			dbCar.setDamagePrice(dtoCarIU.getDamagePrice());
+			
+			Car updatedCar=carRepository.save(dbCar);
+			
+			BeanUtils.copyProperties(updatedCar, dto);
+			dto.setCurrencyType(updatedCar.getCurrencyType());
+			dto.setCarStatusType(updatedCar.getCarStatusType());
+			
+			return dto;
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString()));
+		}
+		
 	}
 }

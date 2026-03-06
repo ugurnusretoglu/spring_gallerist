@@ -82,4 +82,29 @@ public class AddressServiceImpl implements IAddressService {
 		return dtoList;
 	}
 
+	@Override
+	public DtoAddress updateAddress(Long id, DtoAddressIU dtoAddressIU) {
+		DtoAddress dto=new DtoAddress();
+		Optional<Address> optAddress = addressRepository.findById(id);
+		if(optAddress.isPresent()) {
+			Address dbAddress=optAddress.get();
+			
+			dbAddress.setCity(dtoAddressIU.getCity());
+			dbAddress.setDistrict(dtoAddressIU.getDistrict());
+			dbAddress.setNeighborhood(dtoAddressIU.getNeighborhood());
+			dbAddress.setStreet(dtoAddressIU.getStreet());
+			
+			Address updatedAddress=addressRepository.save(dbAddress);
+			
+			BeanUtils.copyProperties(updatedAddress, dto);
+			
+			return dto;
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString()));
+		}
+		
+		
+	}
+
 }

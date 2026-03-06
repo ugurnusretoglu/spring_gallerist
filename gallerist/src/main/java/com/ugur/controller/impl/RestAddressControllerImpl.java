@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,13 @@ public class RestAddressControllerImpl extends RestBaseController implements IRe
 	@Override
 	public RootEntity<List<DtoAddress>> getAllAddresses() {
 		return ok(addressService.getAllDtoAddresses());
+	}
+	
+	@PutMapping("/update/{id}")
+	@Override
+	public RootEntity<DtoAddress> updateAddress(@PathVariable("id") Long id, 
+			@RequestBody DtoAddressIU dtoAddressIU) {
+		return ok(addressService.updateAddress(id, dtoAddressIU));
 	}
 
 }

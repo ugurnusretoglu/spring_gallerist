@@ -13,4 +13,6 @@ public interface IRestCustomerController {
 	
 	public RootEntity<List<DtoCustomer>> getAllCustomers();
 	
+	public RootEntity<DtoCustomer> updateCustomer(Long id, DtoCustomerIU dtoCustomerIU);
+	
 }

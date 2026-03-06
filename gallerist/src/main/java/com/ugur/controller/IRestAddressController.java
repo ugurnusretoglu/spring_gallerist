@@ -13,4 +13,5 @@ public interface IRestAddressController {
 	
 	public RootEntity<List<DtoAddress>> getAllAddresses();
 	
+	public RootEntity<DtoAddress> updateAddress(Long id, DtoAddressIU dtoAddressIU);
 }

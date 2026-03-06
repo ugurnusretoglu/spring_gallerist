@@ -11,5 +11,7 @@ public interface ICustomerService {
 	
 	public void deleteCustomer(Long id);
 	
-	public List<DtoCustomer> getAllCustomers(); 
+	public List<DtoCustomer> getAllCustomers();
+	
+	public DtoCustomer updateCustomer(Long id, DtoCustomerIU dtoCustomerIU);
 }

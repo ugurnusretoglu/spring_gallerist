@@ -12,4 +12,6 @@ public interface IAccountService {
 	public DtoAccount deleteAccount(Long id);
 	
 	public List<DtoAccount> getAllAccounts();
+	
+	public DtoAccount updateAccount(Long id, DtoAccountIU dtoAccountIU);
 }

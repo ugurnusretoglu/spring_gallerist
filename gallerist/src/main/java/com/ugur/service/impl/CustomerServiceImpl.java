@@ -102,4 +102,35 @@ public class CustomerServiceImpl implements ICustomerService {
 		return dtoList;
 	}
 
+	@Override
+	public DtoCustomer updateCustomer(Long id, DtoCustomerIU dtoCustomerIU) {
+		DtoCustomer dto=new DtoCustomer();
+		DtoAccount dtoAccount=new DtoAccount();
+		DtoAddress dtoAddress=new DtoAddress();
+		Optional<Customer> optCustomer = customerRepository.findById(id);
+		
+		if(optCustomer.isPresent()) {
+			Customer dbCustomer=optCustomer.get();
+			
+			dbCustomer.setFirstName(dtoCustomerIU.getFirstName());
+			dbCustomer.setLastName(dtoCustomerIU.getLastName());
+			dbCustomer.setTckn(dtoCustomerIU.getTckn());
+			dbCustomer.setBirthOfDate(dtoCustomerIU.getBirthOfDate());
+			
+			Customer updatedCustomer=customerRepository.save(dbCustomer);
+			
+			BeanUtils.copyProperties(updatedCustomer, dto);
+			BeanUtils.copyProperties(updatedCustomer.getAccount(), dtoAccount);
+			BeanUtils.copyProperties(updatedCustomer.getAddress(), dtoAddress);
+			dto.setAccount(dtoAccount);
+			dto.setAddress(dtoAddress);
+			
+			return dto;
+		}
+		else {
+			throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString()));
+		}
+		
+	}
+
 }

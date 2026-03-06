@@ -13,4 +13,6 @@ public interface IRestCarController {
 	
 	public RootEntity<List<DtoCar>> getAllCars();
 	
+	public RootEntity<DtoCar> updateCar(Long id, DtoCarIU dtoCarIU);
+	
 }
