@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class RefreshToken extends BaseEntity {
 	@Column(name = "expired_date")
 	private Date expiredDate;
 	
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "user_id")
 	private User user;
 }
