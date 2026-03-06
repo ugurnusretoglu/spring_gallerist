@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +56,18 @@ public class CarServiceImpl implements ICarService {
 				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
 		
 		carRepository.delete(car);
+	}
+
+	@Override
+	public List<DtoCar> getAllCars() {
+		List<DtoCar> dtoList=new ArrayList<>();
+		List<Car> carList = carRepository.findAll();
+		
+		for (Car car : carList) {
+			DtoCar dto=new DtoCar();
+			BeanUtils.copyProperties(car, dto);
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 }

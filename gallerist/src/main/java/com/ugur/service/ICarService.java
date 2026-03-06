@@ -1,5 +1,7 @@
 package com.ugur.service;
 
+import java.util.List;
+
 import com.ugur.dto.DtoCar;
 import com.ugur.dto.DtoCarIU;
 
@@ -8,5 +10,7 @@ public interface ICarService {
 	public DtoCar saveCar(DtoCarIU dtoCarIU);
 	
 	public void deleteCar(Long id);
+	
+	public List<DtoCar> getAllCars();
 	
 }

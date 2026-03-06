@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -94,6 +96,28 @@ public class GalleristCarServiceImpl implements IGalleristCarService {
 		else {
 			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
 		}
+	}
+
+	@Override
+	public List<DtoGalleristCar> getAllDtoGalleristCars() {
+		List<DtoGalleristCar> dtoList=new ArrayList<>();
+		List<GalleristCar> galleristList = galleristCarRepository.findAll();
+		
+		for (GalleristCar galleristCar : galleristList) {
+			DtoGalleristCar dto=new DtoGalleristCar();
+			DtoGallerist dtoGallerist=new DtoGallerist();
+			DtoAddress dtoAddress=new DtoAddress();
+			DtoCar dtoCar=new DtoCar();
+			BeanUtils.copyProperties(galleristCar, dto);
+			BeanUtils.copyProperties(galleristCar.getCar(), dtoCar);
+			BeanUtils.copyProperties(galleristCar.getGallerist(), dtoGallerist);
+			BeanUtils.copyProperties(galleristCar.getGallerist().getAddress(), dtoAddress);
+			dtoGallerist.setAddres(dtoAddress);
+			dto.setCar(dtoCar);
+			dto.setGallerist(dtoGallerist);
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 	
 	

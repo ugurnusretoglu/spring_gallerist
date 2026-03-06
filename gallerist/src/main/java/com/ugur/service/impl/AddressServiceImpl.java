@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -64,6 +66,20 @@ public class AddressServiceImpl implements IAddressService {
 		addressRepository.delete(dbAddress);
 		
 		return dtoAddress;
+	}
+
+	@Override
+	public List<DtoAddress> getAllDtoAddresses() {
+		List<DtoAddress> dtoList=new ArrayList<>();
+		List<Address> addressList = addressRepository.findAll();
+		
+		for (Address address : addressList) {
+			DtoAddress dto=new DtoAddress();
+			BeanUtils.copyProperties(address, dto);
+			dtoList.add(dto);
+		}
+		
+		return dtoList;
 	}
 
 }

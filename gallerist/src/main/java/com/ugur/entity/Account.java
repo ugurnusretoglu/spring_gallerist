@@ -35,5 +35,4 @@ public class Account extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private CurrencyType currencyType;
 	
-	
 }

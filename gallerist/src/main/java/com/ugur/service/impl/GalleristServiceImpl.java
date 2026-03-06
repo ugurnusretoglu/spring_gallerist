@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -62,7 +64,22 @@ public class GalleristServiceImpl implements IGalleristService {
 				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
 		galleristRepository.delete(gallerist);
 	}
-	
-	
-	
+
+
+	@Override
+	public List<DtoGallerist> getAllGallerists() {
+		List<DtoGallerist> dtoList=new ArrayList<>();
+		List<Gallerist> galleristList = galleristRepository.findAll();
+		
+		for (Gallerist gallerist : galleristList) {
+			DtoGallerist dto=new DtoGallerist();
+			DtoAddress dtoAddress=new DtoAddress();
+			BeanUtils.copyProperties(gallerist, dto);
+			BeanUtils.copyProperties(gallerist.getAddress(), dtoAddress);
+			dto.setAddres(dtoAddress);
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
+
 }

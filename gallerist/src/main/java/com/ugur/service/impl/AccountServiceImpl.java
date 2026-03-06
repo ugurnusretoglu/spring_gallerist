@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -65,4 +67,16 @@ public class AccountServiceImpl implements IAccountService {
 		return dtoAccount;
 	}
 
+	@Override
+	public List<DtoAccount> getAllAccounts() {
+		List<DtoAccount> dtoList= new ArrayList<>();
+		List<Account> accountList = accountRepository.findAll();
+		
+		for (Account account : accountList) {
+			DtoAccount dto=new DtoAccount();
+			BeanUtils.copyProperties(account, dto);
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
 }

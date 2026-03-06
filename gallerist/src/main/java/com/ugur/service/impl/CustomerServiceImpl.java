@@ -1,6 +1,8 @@
 package com.ugur.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -79,6 +81,25 @@ public class CustomerServiceImpl implements ICustomerService {
 				.orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, id.toString())));
 		
 		customerRepository.delete(customer);
+	}
+
+	@Override
+	public List<DtoCustomer> getAllCustomers() {
+		List<DtoCustomer> dtoList=new ArrayList<>();
+		List<Customer> customerList = customerRepository.findAll();
+		
+		for (Customer customer : customerList) {
+			DtoAddress dtoAddress=new DtoAddress();
+			DtoAccount dtoAccount=new DtoAccount();
+			DtoCustomer dto=new DtoCustomer();
+			BeanUtils.copyProperties(customer, dto);
+			BeanUtils.copyProperties(customer.getAddress(), dtoAddress);
+			BeanUtils.copyProperties(customer.getAccount(), dtoAccount);
+			dto.setAddress(dtoAddress);
+			dto.setAccount(dtoAccount);
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 
 }

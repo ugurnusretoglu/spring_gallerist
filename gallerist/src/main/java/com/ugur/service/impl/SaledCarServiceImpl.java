@@ -2,7 +2,9 @@ package com.ugur.service.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ugur.dto.CurrencyRatesResponse;
+import com.ugur.dto.DtoAccount;
+import com.ugur.dto.DtoAddress;
 import com.ugur.dto.DtoCar;
 import com.ugur.dto.DtoCustomer;
 import com.ugur.dto.DtoGallerist;
@@ -165,6 +169,38 @@ public class SaledCarServiceImpl implements ISaledCarService {
 			throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
 		}
 	}
-	
 
+	@Override
+	public List<DtoSaledCar> getAllSaledCars() {
+		List<DtoSaledCar> dtoList=new ArrayList<>();
+		List<SaledCar> saledCarList = saledCarRepository.findAll();
+		
+		for (SaledCar saledCar : saledCarList) {
+			DtoSaledCar dto=new DtoSaledCar();
+			DtoCustomer dtoCustomer=new DtoCustomer();
+			DtoCar dtoCar=new DtoCar();
+			DtoGallerist dtoGallerist=new DtoGallerist();
+			DtoAddress dtoAddress=new DtoAddress();
+			DtoAddress dtoAddress2=new DtoAddress();
+			DtoAccount dtoAccount=new DtoAccount();
+			
+			BeanUtils.copyProperties(saledCar, dto);
+			BeanUtils.copyProperties(saledCar.getCustomer(), dtoCustomer);
+			BeanUtils.copyProperties(saledCar.getCar(), dtoCar);
+			BeanUtils.copyProperties(saledCar.getGallerist(), dtoGallerist);
+			BeanUtils.copyProperties(saledCar.getCustomer().getAddress(), dtoAddress);
+			BeanUtils.copyProperties(saledCar.getCustomer().getAccount(), dtoAccount);
+			BeanUtils.copyProperties(saledCar.getGallerist().getAddress(), dtoAddress2);
+			
+			dtoCustomer.setAddress(dtoAddress);
+			dtoCustomer.setAccount(dtoAccount);
+			dtoGallerist.setAddres(dtoAddress2);
+			dto.setCustomer(dtoCustomer);
+			dto.setCar(dtoCar);
+			dto.setGallerist(dtoGallerist);
+			
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
 }

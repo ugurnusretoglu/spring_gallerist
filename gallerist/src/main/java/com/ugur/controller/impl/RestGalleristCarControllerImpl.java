@@ -1,7 +1,10 @@
 package com.ugur.controller.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +37,12 @@ public class RestGalleristCarControllerImpl extends RestBaseController implement
 	@Override
 	public void deleteGalleristCar(@PathVariable(name = "id") Long id) {
 		galleristCarService.deleteGalleristCar(id);
+	}
+	
+	@GetMapping("/list")
+	@Override
+	public RootEntity<List<DtoGalleristCar>> getAllGalleristCars() {
+		return ok(galleristCarService.getAllDtoGalleristCars());
 	}
 
 }
