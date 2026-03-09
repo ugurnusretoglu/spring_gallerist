@@ -12,4 +12,6 @@ public interface IRestGalleristController {
 	public void deleteGallerist(Long id);
 	
 	public RootEntity<List<DtoGallerist>> getAllGallerists();
+	
+	public RootEntity<DtoGallerist> updateGallerist(Long id, DtoGalleristIU dtoGalleristIU);
 }

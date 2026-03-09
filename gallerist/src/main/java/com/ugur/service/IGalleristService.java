@@ -12,4 +12,6 @@ public interface IGalleristService {
 	public void deleteGallerist(Long id);
 	
 	public List<DtoGallerist> getAllGallerists();
+	
+	public DtoGallerist updateGallerist(Long id, DtoGalleristIU dtoGalleristIU);
 }

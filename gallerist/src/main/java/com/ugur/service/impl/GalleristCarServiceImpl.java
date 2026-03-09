@@ -119,7 +119,4 @@ public class GalleristCarServiceImpl implements IGalleristCarService {
 		}
 		return dtoList;
 	}
-	
-	
-
 }

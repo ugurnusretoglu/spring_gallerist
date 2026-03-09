@@ -12,5 +12,4 @@ public class DtoSaledCar extends DtoBase {
 	private DtoGallerist gallerist;
 	
 	private DtoCar car;
-	
 }
